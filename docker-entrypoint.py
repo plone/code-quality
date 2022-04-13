@@ -37,7 +37,7 @@ def check_with_zpretty(paths: list[Path]) -> bool:
         for path in raw_paths:
             if paths := list(path.glob(f"**/*.{ext}")):
                 result = run_command(cmd, args, paths)
-                status = status or result.returncode
+                status = status or result
     return status
 
 
