@@ -73,7 +73,9 @@ CHECKS = {
         run_zpretty,
         [
             "zpretty",
-            ["--check",],
+            [
+                "--check",
+            ],
         ],
     ],
 }
