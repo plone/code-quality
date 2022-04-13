@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -145,8 +146,24 @@ def main_format(raw_paths: str) -> int:
     return status
 
 
+def change_working_dir(sub_dir: str):
+    """Change the working directory.
+
+    :param sub_dir: Path to the subdiretory to use as working dir.
+    """
+    current_path = Path(".").resolve()
+    new_dir = current_path / sub_dir
+    if new_dir.exists() and new_dir.is_dir():
+        os.chdir(new_dir)
+
+
 if __name__ == "__main__":
     """Run code-quality."""
+    # Change working directory, if needed
+    base_dir = os.environ.get("BASE_DIR", "")
+    if base_dir and not (base_dir.startswith(".") or base_dir.startswith("/")):
+        change_working_dir(base_dir)
+
     # Remove filename from arguments
     all_args = sys.argv[1:]
     # Get the action to run: check or format
