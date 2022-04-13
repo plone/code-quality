@@ -1,0 +1,5 @@
+black
+isort
+flakeheaven
+pyroma
+zpretty
