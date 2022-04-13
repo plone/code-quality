@@ -20,17 +20,16 @@ def run_command(cmd: str, args: list[str], paths: list[Path]) -> int:
     return result.returncode
 
 
-def check_with_zpretty(paths: list[Path]) -> bool:
-    """Run check with zpretty.
+def run_zpretty(cmd: str, args: list[str], paths: list[Path]) -> bool:
+    """Run zpretty.
 
-    :param paths: List of paths to check.
+    :param paths: List of paths to format.
     :returns: Status code.
     """
     raw_paths = [path for path in paths if path.is_dir()]
-    cmd = "zpretty"
     checks = {
-        "xml": ["-x", "-i", "--check"],
-        "zcml": ["-z", "-i", "--check"],
+        "xml": ["-x", "-i"] + args,
+        "zcml": ["-z", "-i"] + args,
     }
     status = 0
     for ext, args in checks.items():
@@ -38,26 +37,6 @@ def check_with_zpretty(paths: list[Path]) -> bool:
             if paths := list(path.glob(f"**/*.{ext}")):
                 result = run_command(cmd, args, paths)
                 status = status or result
-    return status
-
-
-def format_with_zpretty(cmd: str, _: list[str], paths: list[Path]) -> bool:
-    """Format code with zpretty.
-
-    :param paths: List of paths to format.
-    :returns: Status code.
-    """
-    raw_paths = [path for path in paths if path.is_dir()]
-    checks = {
-        "xml": ["-x", "-i"],
-        "zcml": ["-z", "-i"],
-    }
-    status = 0
-    for ext, args in checks.items():
-        for path in raw_paths:
-            if paths := list(path.glob(f"**/*.{ext}")):
-                result = run_command(cmd, args, paths)
-                status = status or result.returncode
     return status
 
 
@@ -90,7 +69,13 @@ CHECKS = {
             ["-n", "10", "-d"],
         ],
     ],
-    "zpretty": [check_with_zpretty, []],
+    "zpretty": [
+        run_zpretty,
+        [
+            "zpretty",
+            ["--check",],
+        ],
+    ],
 }
 
 
@@ -110,7 +95,7 @@ FORMATTERS = {
         ],
     ],
     "zpretty": [
-        format_with_zpretty,
+        run_zpretty,
         [
             "zpretty",
             [],
