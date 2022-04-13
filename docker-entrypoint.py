@@ -20,12 +20,13 @@ def run_command(cmd: str, args: list[str], paths: list[Path]) -> int:
     return result.returncode
 
 
-def check_with_zpretty(raw_paths: list[Path]) -> bool:
+def check_with_zpretty(paths: list[Path]) -> bool:
     """Run check with zpretty.
 
-    :param raw_paths: List of paths to check.
+    :param paths: List of paths to check.
     :returns: Status code.
     """
+    raw_paths = [path for path in paths if path.is_dir()]
     cmd = "zpretty"
     checks = {
         "xml": ["-x", "-i", "--check"],
@@ -40,13 +41,13 @@ def check_with_zpretty(raw_paths: list[Path]) -> bool:
     return status
 
 
-def format_with_zpretty(cmd: str, _: list[str], raw_paths: list[Path]) -> bool:
+def format_with_zpretty(cmd: str, _: list[str], paths: list[Path]) -> bool:
     """Format code with zpretty.
 
-    :param raw_paths: List of paths to format.
+    :param paths: List of paths to format.
     :returns: Status code.
     """
-    raw_paths = [path for path in raw_paths if path.is_dir()]
+    raw_paths = [path for path in paths if path.is_dir()]
     checks = {
         "xml": ["-x", "-i"],
         "zcml": ["-z", "-i"],
