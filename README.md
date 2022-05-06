@@ -105,7 +105,7 @@ Please **DO NOT** commit to version branches directly. Even for the smallest and
 
 Based on a solution originally developed by [kitconcept GmbH](https://kitconcept.com).
 
-![Plone Foundation](https://raw.githubusercontent.com/plone/.github/main/plone-foundation.png)
+[![Plone Foundation](https://raw.githubusercontent.com/plone/.github/main/plone-foundation.png)](https://plone.org/)
 
 ## License
 
