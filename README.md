@@ -4,26 +4,46 @@
 
 First, go to the repository you want to check.
 
+
+### [black](https://black.readthedocs.io/en/stable/)
+
 Check **src** directory and **setup.py** file with **black**
 ```bash
 docker run --rm -v "${PWD}":/github/workspace plone/code-quality:latest check black src setup.py
 ```
 
+### [flake8](https://flake8.pycqa.org/en/stable/)
+
+Flake8 checks, using [flakeheaven](https://pypi.org/project/flakeheaven/) configuration format.
+
+Current plugins in use:
+
+* [flake8-blind-except](https://pypi.org/project/flake8-blind-except/)
+* [flake8-debugger](https://pypi.org/project/flake8-debugger/)
+* [flake8-print](https://pypi.org/project/flake8-print/)
+
 Check **src** directory and **setup.py** file with **flake8**
+
 ```bash
 docker run --rm -v "${PWD}":/github/workspace plone/code-quality:latest check flake8 src setup.py
 ```
 
+### [isort](https://pycqa.github.io/isort/)
+
 Check **src** directory and **setup.py** file with **isort**
+
 ```bash
 docker run --rm -v "${PWD}":/github/workspace plone/code-quality:latest check isort src setup.py
 ```
 
+### [zpretty](https://pypi.org/project/zpretty/)
+
 Check **src** directory with **zpretty**
+
 ```bash
 docker run --rm -v "${PWD}":/github/workspace plone/code-quality:latest check zpretty src
-```
 
+```
 ## Configuration
 
 To configure black, flake8 (via flakeheaven) and isort, make sure you have a pyproject.toml in the root of the directory you are mounting.
