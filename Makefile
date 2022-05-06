@@ -1,4 +1,4 @@
-IMAGE_NAME=kitconcept/code-quality
+IMAGE_NAME=plone/code-quality
 DOCKERFILE=Dockerfile
 CODEBASE=docker-entrypoint.py
 LINT=docker run --rm -v "${PWD}":/github/workspace "${IMAGE_NAME}:latest" check

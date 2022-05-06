@@ -1,5 +1,7 @@
 .git
 .github
+.vscode
 Dockerfile
+LICENSE.txt
 Makefile
 README.md

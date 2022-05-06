@@ -11,7 +11,8 @@ on:
       - 'main'
 
 env:
-  TEST_TAG: kitconcept/code-quality:test
+  IMAGE_NAME: plone/code-quality
+  TEST_TAG: test
   TEST_PATHS: docker-entrypoint.py
 
 jobs:
@@ -29,7 +30,7 @@ jobs:
         with:
           # list of Docker images to use as base name for tags
           images: |
-            kitconcept/code-quality
+            ${{ env.IMAGE_NAME }}
           # generate Docker tags based on the following events/attributes
           tags: |
             type=ref,event=branch
@@ -57,13 +58,13 @@ jobs:
         with:
           context: .
           load: true
-          tags: ${{ env.TEST_TAG }}
+          tags: ${{ env.IMAGE_NAME }}:${{ env.TEST_TAG }}
 
       - name: Test image
         run: |
-          docker run --rm -v "${PWD}":/github/workspace ${{ env.TEST_TAG }} check black ${{ env.TEST_PATHS }}
-          docker run --rm -v "${PWD}":/github/workspace ${{ env.TEST_TAG }} check flake8 ${{ env.TEST_PATHS }}
-          docker run --rm -v "${PWD}":/github/workspace ${{ env.TEST_TAG }} check isort ${{ env.TEST_PATHS }}
+          docker run --rm -v "${PWD}":/github/workspace ${{ env.IMAGE_NAME }}:${{ env.TEST_TAG }} check black ${{ env.TEST_PATHS }}
+          docker run --rm -v "${PWD}":/github/workspace ${{ env.IMAGE_NAME }}:${{ env.TEST_TAG }} check flake8 ${{ env.TEST_PATHS }}
+          docker run --rm -v "${PWD}":/github/workspace ${{ env.IMAGE_NAME }}:${{ env.TEST_TAG }} check isort ${{ env.TEST_PATHS }}
 
       - name: Build and push
         uses: docker/build-push-action@v2

@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
+from pathlib import Path
+
+import logging
 import os
 import subprocess
 import sys
-from pathlib import Path
+
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger()
 
 
 def run_command(cmd: str, args: list[str], paths: list[Path]) -> int:
@@ -123,10 +129,10 @@ def main_check(tool: str, raw_paths: str) -> int:
     check = CHECKS.get(tool)
     paths = parse_paths(raw_paths)
     if not check:
-        print(f"Please provide a valid check. Received {check}")
+        logger.error(f"Please provide a valid check. Received {check}")
         return 1
     elif not paths:
-        print(f"Please provide a valid path. Parsed {raw_paths} to {paths}")
+        logger.error(f"Please provide a valid path. Parsed {raw_paths} to {paths}")
         return 1
     func, args = check
     return func(*args, paths=paths)
@@ -137,7 +143,7 @@ def main_format(raw_paths: str) -> int:
     status = 0
     paths = parse_paths(raw_paths)
     if not (paths):
-        print(f"Please provide a valid path. Parsed {raw_paths} to {paths}")
+        logger.error(f"Please provide a valid path. Parsed {raw_paths} to {paths}")
         return 1
     for value in FORMATTERS.values():
         func, raw_args = value
@@ -173,5 +179,5 @@ if __name__ == "__main__":
     elif action == "format":
         sys.exit(main_format(all_args[1]))
     else:
-        print("Please provide a valid action")
+        logger.error("Please provide a valid action")
         sys.exit(1)

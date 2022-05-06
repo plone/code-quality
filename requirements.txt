@@ -1,5 +1,8 @@
 black
 isort
 flakeheaven
+flake8-blind-except
+flake8-debugger
+flake8-print
 pyroma
 zpretty

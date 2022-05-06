@@ -1,12 +1,12 @@
 FROM python:3.10-slim
 
-LABEL maintainer="kitconcept GmbH <info@kitconcept.com>" \
+LABEL maintainer="Plone Community <dev@plone.org>"  \
       org.label-schema.name="code-quality" \
       org.label-schema.description="Plone code quality tool" \
-      org.label-schema.vendor="kitconcept GmbH" \
-      org.label-schema.docker.cmd="docker run -rm -v "${PWD}":/github/workspace kitconcept/code-quality check black src"
+      org.label-schema.vendor="Plone Foundation" \
+      org.label-schema.docker.cmd="docker run -rm -v "${PWD}":/github/workspace plone/code-quality check black src"
 
-COPY requirements.txt docker-entrypoint.py ./
+COPY requirements.txt pyproject.toml docker-entrypoint.py ./
 
 RUN pip install -U pip && pip install -r requirements.txt
 
