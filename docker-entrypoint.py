@@ -89,17 +89,17 @@ CHECKS = {
 
 
 FORMATTERS = {
-    "black": [
-        run_command,
-        [
-            "black",
-            [],
-        ],
-    ],
     "isort": [
         run_command,
         [
             "isort",
+            [],
+        ],
+    ],
+    "black": [
+        run_command,
+        [
+            "black",
             [],
         ],
     ],
