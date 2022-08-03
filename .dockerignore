@@ -1,6 +1,7 @@
 .git
 .github
 .vscode
+docs/
 Dockerfile
 LICENSE.txt
 Makefile

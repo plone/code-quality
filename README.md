@@ -1,4 +1,20 @@
-# Plone Code Quality tool
+<p align="center">
+  <a href="https://hub.docker.com/r/plone/code-quality">
+    <img alt="Plone Code Quality tool" width="200px" src="https://raw.githubusercontent.com/plone/code-quality/main/docs/icon.png">
+  </a>
+</p>
+
+<h1 align="center">
+  Plone Code Quality tool
+</h1>
+
+<div align="center">
+
+[![Docker Image Version (latest semver)](https://img.shields.io/docker/v/plone/code-quality)](https://hub.docker.com/r/plone/code-quality)
+![GitHub Repo stars](https://img.shields.io/github/stars/plone/code-quality?style=flat-square)
+[![license badge](https://img.shields.io/github/license/plone/code-quality)](./LICENSE)
+
+</div>
 
 ## Usage
 
