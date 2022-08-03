@@ -1,3 +1,7 @@
+.*project
 .vscode
 /.settings/
-.*project
+bin
+include
+lib
+lib64

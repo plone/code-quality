@@ -1,8 +1,9 @@
 black==22.6.0
-isort==5.10.1
-flakeheaven==3.0.0
 flake8-blind-except==0.2.1
 flake8-debugger==4.1.2
 flake8-print==5.0.0
+flakeheaven==3.0.0
+isort==5.10.1
 pyroma==4.0b2
+tomli==2.0.1
 zpretty==2.2.0

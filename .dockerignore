@@ -1,8 +1,14 @@
-.git
-.github
+.*project
 .vscode
 docs/
+/.settings/
+/tests
+bin
 Dockerfile
+include
+lib
+lib64
 LICENSE.txt
 Makefile
 README.md
+requirements-dev.txt
