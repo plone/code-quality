@@ -1,4 +1,15 @@
-FROM python:3.10-slim
+FROM python:3.10-slim as base
+FROM base as builder
+
+RUN pip install -U pip wheel \
+    && mkdir /app /wheelhouse
+
+COPY requirements.txt /app/
+COPY src /app/src
+
+RUN cd /app/ && pip wheel -r requirements.txt --wheel-dir=/wheelhouse
+
+FROM base
 
 LABEL maintainer="Plone Community <dev@plone.org>"  \
       org.label-schema.name="code-quality" \
@@ -6,9 +17,9 @@ LABEL maintainer="Plone Community <dev@plone.org>"  \
       org.label-schema.vendor="Plone Foundation" \
       org.label-schema.docker.cmd="docker run -rm -v "${PWD}":/github/workspace plone/code-quality check black src"
 
-COPY requirements.txt pyproject.toml docker-entrypoint.py ./
-
-RUN pip install -U pip && pip install -r requirements.txt
+COPY docker-entrypoint.py /
+COPY --from=builder /wheelhouse /wheelhouse
+RUN pip install --force-reinstall --no-index --no-deps /wheelhouse/*
 
 WORKDIR /github/workspace
 

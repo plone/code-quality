@@ -1,6 +1,6 @@
 IMAGE_NAME=plone/code-quality
 DOCKERFILE=Dockerfile
-CODEBASE=docker-entrypoint.py
+CODEBASE=docker-entrypoint.py src/setup.py src/plone_code_analysis tests/fixtures/packages/ok tests/package tests/conftest.py
 LINT=docker run --rm -v "${PWD}":/github/workspace "${IMAGE_NAME}:latest" check
 FORMAT=docker run --rm -v "${PWD}":/github/workspace "${IMAGE_NAME}:latest" format
 CURRENT_USER=$$(whoami)
@@ -16,14 +16,20 @@ bin/pip:
 	python3 -m venv .
 	bin/pip install -r requirements.txt
 
+bin/pytest:
+	bin/pip install -r tests/requirements.txt
+
 .PHONY: clean
 clean: ## remove virtual environment
 	rm -fr bin include lib lib64
 
 .PHONY: setup
-setup: bin/pip ## Create virtualenv and run pip install
-	@echo "$(GREEN)==> Setup Dev Environment$(RESET)"
-	bin/pip install -r tests/requirements.txt
+setup: bin/pytest ## Create virtualenv and run pip install
+
+.PHONY: test
+test: bin/pytest ## Create virtualenv and run pip install
+	@echo "$(GREEN)==> Run tests $(RESET)"
+	bin/python -m pytest tests
 
 .PHONY: build-image
 build-image:  ## Build Docker Image
@@ -37,8 +43,13 @@ lint:  build-image ## Lint code with existing image
 	$(LINT) flake8 "${CODEBASE}"
 	$(LINT) isort "${CODEBASE}"
 
+.PHONY: lint-all
+lint-all:  build-image ## Lint code with existing image using configurations from pyproject.toml
+	@echo "Linting ${CODEBASE} $(IMAGE_NAME):latest"
+	$(LINT)
+
 .PHONY: format
 format:  build-image ## Format code with existing image
 	@echo "Formatting ${CODEBASE} $(IMAGE_NAME):latest"
-	$(FORMAT) "${CODEBASE}"
+	$(FORMAT)
 	sudo chown -R ${CURRENT_USER}: *

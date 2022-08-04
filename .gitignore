@@ -1,4 +1,6 @@
+__pycache__
 .*project
+.pytest_cache
 .vscode
 /.settings/
 bin
