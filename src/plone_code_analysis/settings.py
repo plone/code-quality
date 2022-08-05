@@ -29,8 +29,8 @@ def read_settings_from_file(path: Path) -> dict[str, Any]:
     """
     settings = deepcopy(DEFAULT_SETTINGS)
     if not path.exists():
-        logger.info("File not found: pyproject.toml")
-        return {}
+        logger.debug(f"Settings: {path} not found, using default settings.")
+        return settings
     config = tomli.loads(path.read_text())
     for key in SECTION.split("."):
         config = config.get(key, {})

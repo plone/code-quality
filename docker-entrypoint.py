@@ -39,7 +39,8 @@ if __name__ == "__main__":
     if base_dir and not (base_dir.startswith(".") or base_dir.startswith("/")):
         change_working_dir(base_dir)
 
-    settings = read_settings_from_file(Path("pyproject.toml"))
+    settings_file = Path("pyproject.toml").resolve()
+    settings = read_settings_from_file(settings_file)
 
     # Remove filename from arguments
     all_args = sys.argv[1:]
