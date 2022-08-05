@@ -30,7 +30,7 @@ class FancyLogger:
     TERMINATOR = "\x1b[0m"
     HEADER_DELIMITER = "="
     REPLACEMENTS = (
-        (r"\/github\/workspace\/", ""),
+        (r"\/github\/workspace\/?", "./"),
         (r"PosixPath\('([^']*)'\)", r"\1"),
     )
 

@@ -57,15 +57,15 @@ if __name__ == "__main__":
     elif len(all_args) == 2:
         if action == "format" and all_args[1] not in FORMATTERS:
             tool = "all"
-            paths = all_args[1]
+            paths = all_args[1].strip()
         else:
             tool = all_args[1]
             paths = ""
     elif len(all_args) >= 3:
         # Tool and many paths
         tool = all_args[1]
-        paths = " ".join(all_args[2:])
-    paths = parse_paths(paths)
+        paths = " ".join(all_args[2:]).strip()
+    paths = parse_paths(paths) if paths else []
     logger.debug(f"Provided paths {paths}")
     status = ACTIONS[action](settings, tool, paths)
 
