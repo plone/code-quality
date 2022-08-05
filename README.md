@@ -97,7 +97,9 @@ paths_pyroma = "src/ tests/fixtures/packages/ok"
 
 First, go to the repository you want to check or format.
 
-### Run all Checks
+### Checks / Linter
+
+#### Run all Checks
 
 Using the configuration available in `pyproject.toml`, run:
 
@@ -105,7 +107,7 @@ Using the configuration available in `pyproject.toml`, run:
 docker run --rm -v "${PWD}":/github/workspace plone/code-quality:latest check
 ```
 
-### Check with [black](https://black.readthedocs.io/en/stable/)
+#### Check with [black](https://black.readthedocs.io/en/stable/)
 
 Check with `pyproject.toml` settings:
 
@@ -119,7 +121,7 @@ Explicitly check **src** directory and **setup.py** file.
 docker run --rm -v "${PWD}":/github/workspace plone/code-quality:latest check black src setup.py
 ```
 
-### Check with [flake8](https://flake8.pycqa.org/en/stable/)
+#### Check with [flake8](https://flake8.pycqa.org/en/stable/)
 
 Flake8 checks, using [flakeheaven](https://pypi.org/project/flakeheaven/) configuration format.
 
@@ -141,7 +143,7 @@ Explicitly check **src** directory and **setup.py** file.
 docker run --rm -v "${PWD}":/github/workspace plone/code-quality:latest check flake8 src setup.py
 ```
 
-### Check with [isort](https://pycqa.github.io/isort/)
+#### Check with [isort](https://pycqa.github.io/isort/)
 
 Check with `pyproject.toml` settings:
 
@@ -156,7 +158,7 @@ docker run --rm -v "${PWD}":/github/workspace plone/code-quality:latest check is
 ```
 
 
-### Check with [pyroma](https://pycqa.github.io/pyroma/)
+#### Check with [pyroma](https://pycqa.github.io/pyroma/)
 
 Check with `pyproject.toml` settings:
 
@@ -170,7 +172,7 @@ Explicitly check **src/mypackage** directory .
 docker run --rm -v "${PWD}":/github/workspace plone/code-quality:latest check pyroma src/mypackage
 ```
 
-### Check with [zpretty](https://pypi.org/project/zpretty/)
+#### Check with [zpretty](https://pypi.org/project/zpretty/)
 
 Check with `pyproject.toml` settings:
 
@@ -182,6 +184,63 @@ Explicitly check **src** directory .
 
 ```bash
 docker run --rm -v "${PWD}":/github/workspace plone/code-quality:latest check zpretty src
+
+```
+
+### Formatter
+
+To avoid rewriting the owner and group information of the formatted files, we need to pass the correct `--user` option to the `docker run` command.
+
+In all examples bellow we use the `"$(id -u $(whoami)):$(getent group $(whoami)|cut -d: -f3)"` snippet to set the `--user` option to the current user running the formatter.
+
+#### Run all formatters
+
+Using the configuration available in `pyproject.toml`, run:
+
+```bash
+docker run --user="$(id -u $(whoami)):$(getent group $(whoami)|cut -d: -f3)" --rm -v "${PWD}":/github/workspace plone/code-quality:latest format
+```
+
+#### Format with [black](https://black.readthedocs.io/en/stable/)
+
+Format with `pyproject.toml` settings:
+
+```bash
+docker run --user="$(id -u $(whoami)):$(getent group $(whoami)|cut -d: -f3)" --rm -v "${PWD}":/github/workspace plone/code-quality:latest format black
+```
+
+Explicitly format **src** directory and **setup.py** file.
+
+```bash
+docker run --user="$(id -u $(whoami)):$(getent group $(whoami)|cut -d: -f3)" --rm -v "${PWD}":/github/workspace plone/code-quality:latest format src setup.py
+```
+
+#### Format with [isort](https://pycqa.github.io/isort/)
+
+Format with `pyproject.toml` settings:
+
+```bash
+docker run --user="$(id -u $(whoami)):$(getent group $(whoami)|cut -d: -f3)" --rm -v "${PWD}":/github/workspace plone/code-quality:latest format isort
+```
+
+Explicitly format **src** directory and **setup.py** file.
+
+```bash
+docker run --user="$(id -u $(whoami)):$(getent group $(whoami)|cut -d: -f3)" --rm -v "${PWD}":/github/workspace plone/code-quality:latest format src setup.py
+```
+
+#### Format with [zpretty](https://pypi.org/project/zpretty/)
+
+Format with `pyproject.toml` settings:
+
+```bash
+docker run --user="$(id -u $(whoami)):$(getent group $(whoami)|cut -d: -f3)" --rm -v "${PWD}":/github/workspace plone/code-quality:latest format zpretty
+```
+
+Explicitly format the **src** directory .
+
+```bash
+docker run --user="$(id -u $(whoami)):$(getent group $(whoami)|cut -d: -f3)" --rm -v "${PWD}":/github/workspace plone/code-quality:latest format src
 
 ```
 

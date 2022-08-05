@@ -3,10 +3,12 @@ DOCKERFILE=Dockerfile
 ifndef LOG_LEVEL
 	LOG_LEVEL=INFO
 endif
+CURRENT_USER=$$(whoami)
+USER_INFO=$$(id -u ${CURRENT_USER}):$$(getent group ${CURRENT_USER}|cut -d: -f3)
 CODEBASE=docker-entrypoint.py src/setup.py src/plone_code_analysis tests/fixtures/packages/ok tests/package tests/conftest.py
 LINT=docker run -e LOG_LEVEL="${LOG_LEVEL}" --rm -v "${PWD}":/github/workspace "${IMAGE_NAME}:latest" check
-FORMAT=docker run -e LOG_LEVEL="${LOG_LEVEL}" --rm -v "${PWD}":/github/workspace "${IMAGE_NAME}:latest" format
-CURRENT_USER=$$(whoami)
+FORMAT=docker run --user="${USER_INFO}" -e LOG_LEVEL="${LOG_LEVEL}" --rm -v "${PWD}":/github/workspace "${IMAGE_NAME}:latest" format
+
 
 # Add the following 'help' target to your Makefile
 # And add help text after each target name starting with '\#\#'
@@ -55,4 +57,3 @@ lint-all:  build-image ## Lint code with existing image using configurations fro
 format:  build-image ## Format code with existing image
 	@echo "Formatting ${CODEBASE} $(IMAGE_NAME):latest"
 	$(FORMAT)
-	sudo chown -R ${CURRENT_USER}: *
