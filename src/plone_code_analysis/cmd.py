@@ -27,7 +27,11 @@ def run_command(cmd: str, args: list[str], paths: list[Path]) -> int:
     proc = subprocess.run(all_args, capture_output=True)
     code = proc.returncode
     if code:
-        msg = proc.stdout.decode()
+        # Each tool behaves in a distinct way, so we
+        # concatenate the stdout and stderr
+        stdout = proc.stdout.decode()
+        stderr = proc.stderr.decode()
+        msg = f"{stdout}\n{stderr}".strip()
         logger.error(msg, fancy=False)
     else:
         logger.success("All good!")
