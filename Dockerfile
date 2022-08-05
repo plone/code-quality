@@ -17,10 +17,10 @@ LABEL maintainer="Plone Community <dev@plone.org>"  \
       org.label-schema.vendor="Plone Foundation" \
       org.label-schema.docker.cmd="docker run -rm -v "${PWD}":/github/workspace plone/code-quality check black src"
 
-COPY docker-entrypoint.py /
-COPY --from=builder /wheelhouse /wheelhouse
-RUN pip install --force-reinstall --no-index --no-deps /wheelhouse/*
-
 WORKDIR /github/workspace
 
 ENTRYPOINT [ "/docker-entrypoint.py" ]
+
+COPY docker-entrypoint.py /
+COPY --from=builder /wheelhouse /wheelhouse
+RUN pip install --force-reinstall --no-index --no-deps /wheelhouse/*
