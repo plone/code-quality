@@ -1,8 +1,11 @@
 IMAGE_NAME=plone/code-quality
 DOCKERFILE=Dockerfile
+ifndef LOG_LEVEL
+	LOG_LEVEL=INFO
+endif
 CODEBASE=docker-entrypoint.py src/setup.py src/plone_code_analysis tests/fixtures/packages/ok tests/package tests/conftest.py
-LINT=docker run --rm -v "${PWD}":/github/workspace "${IMAGE_NAME}:latest" check
-FORMAT=docker run --rm -v "${PWD}":/github/workspace "${IMAGE_NAME}:latest" format
+LINT=docker run -e LOG_LEVEL="${LOG_LEVEL}" --rm -v "${PWD}":/github/workspace "${IMAGE_NAME}:latest" check
+FORMAT=docker run -e LOG_LEVEL="${LOG_LEVEL}" --rm -v "${PWD}":/github/workspace "${IMAGE_NAME}:latest" format
 CURRENT_USER=$$(whoami)
 
 # Add the following 'help' target to your Makefile

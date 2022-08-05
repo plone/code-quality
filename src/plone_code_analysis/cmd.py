@@ -1,4 +1,5 @@
 from pathlib import Path
+from plone_code_analysis.logger import logger
 
 import os
 import subprocess
@@ -22,8 +23,15 @@ def run_command(cmd: str, args: list[str], paths: list[Path]) -> int:
         _parse_cmd(cmd),
     ]
     all_args = cmd + args + paths
-    result = subprocess.run(all_args)
-    return result.returncode
+    logger.debug(f"Running command {all_args}")
+    proc = subprocess.run(all_args, capture_output=True)
+    code = proc.returncode
+    if code:
+        msg = proc.stdout.decode()
+        logger.error(msg, fancy=False)
+    else:
+        logger.success("All good!")
+    return code
 
 
 def run_zpretty(cmd: str, args: list[str], paths: list[Path]) -> bool:

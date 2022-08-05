@@ -195,6 +195,43 @@ Please **DO NOT** commit to version branches directly. Even for the smallest and
 
 **ALWAYS** open a pull request and ask somebody else to merge your code. **NEVER** merge it yourself.
 
+
+### Running linters on this codebase
+
+Use this tool to lint its own codebase:
+
+```shell
+make lint-all
+```
+
+You can also increase the verbosity with:
+
+```shell
+LOG_LEVEL=DEBUG make lint-all
+```
+### Running formatters on this codebase
+
+Use this tool to format its own codebase:
+
+```shell
+make format
+```
+
+You can also increase the verbosity with:
+
+```shell
+LOG_LEVEL=DEBUG make format
+```
+
+
+### Running local tests
+
+Tests are implemented with `pytest` and can be run with:
+
+```shell
+make test
+```
+
 ## Credits
 
 Based on a solution originally developed by [kitconcept GmbH](https://kitconcept.com).

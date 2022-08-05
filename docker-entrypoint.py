@@ -26,11 +26,15 @@ def change_working_dir(sub_dir: str):
     new_dir = current_path / sub_dir
     if new_dir.exists() and new_dir.is_dir():
         os.chdir(new_dir)
+        logger.debug(f"Changed base directory to {new_dir}")
+    else:
+        logger.debug(f"Failed to changed base directory to {sub_dir}")
 
 
 if __name__ == "__main__":
     """Run code-quality."""
     # Change working directory, if needed
+    logger.info("Starting plone-code-analysis", header=1)
     base_dir = os.environ.get("BASE_DIR", "")
     if base_dir and not (base_dir.startswith(".") or base_dir.startswith("/")):
         change_working_dir(base_dir)
@@ -61,6 +65,11 @@ if __name__ == "__main__":
         tool = all_args[1]
         paths = " ".join(all_args[2:])
     paths = parse_paths(paths)
+    logger.debug(f"Provided paths {paths}")
     status = ACTIONS[action](settings, tool, paths)
+
+    logger.info("Results", header=1)
     if status:
+        logger.error("There were errors")
         sys.exit(1)
+    logger.success("Done")

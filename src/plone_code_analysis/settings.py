@@ -51,8 +51,8 @@ def parse_paths(value: str) -> list[Path]:
     """
     separator = "\n" if "\n" in value else " "
     possible_paths = [Path(path) for path in value.split(separator)]
-    valid_paths = {path.resolve() for path in possible_paths if path.exists()}
-    return list(valid_paths)
+    valid_paths = list({path.resolve() for path in possible_paths if path.exists()})
+    return valid_paths
 
 
 def checks_from_settings(settings: dict) -> dict:
@@ -66,6 +66,7 @@ def checks_from_settings(settings: dict) -> dict:
     checks = {
         check: settings.get(f"paths_{check}", default_path) for check in all_checks
     }
+    logger.debug(f"Settings: {checks}")
     return checks
 
 
@@ -81,4 +82,5 @@ def formatters_from_settings(settings: dict) -> dict:
         formatter: settings.get(f"paths_{formatter}", default_path)
         for formatter in all_formatters
     }
+    logger.debug(f"Settings: {formatters}")
     return formatters

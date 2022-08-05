@@ -70,5 +70,6 @@ def run_checks(settings: dict, tool: str = "", paths: list[Path] = None) -> int:
     else:
         checks = all_checks
     for check, paths in checks.items():
-        status = status or run_check(check, paths)
+        logger.info(f"Running check: {check}", header=2)
+        status = run_check(check, paths) or status
     return status

@@ -54,5 +54,6 @@ def run_formatters(settings: dict, tool: str = "", paths: list[Path] = None) -> 
     else:
         formatters = all_formatters
     for formatter, paths in formatters.items():
-        status = status or run_formatter(formatter, paths)
+        logger.info(f"Running formatter: {formatter}", header=2)
+        status = run_formatter(formatter, paths) or status
     return status
