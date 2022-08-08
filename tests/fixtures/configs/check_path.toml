@@ -1,0 +1,3 @@
+[tool.plone-code-analysis]
+paths= "foo"
+paths_isort= "setup.py"

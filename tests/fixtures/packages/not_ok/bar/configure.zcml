@@ -1,0 +1,6 @@
+<configure  xmlns:meta="http://namespaces.zope.org/meta"
+    xmlns:zcml="http://namespaces.zope.org/zcml">
+
+      <meta:provides feature="foo" />
+
+</configure>

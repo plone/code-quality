@@ -22,5 +22,4 @@ pyflakes = ["+*"]
 "flake8-*" = ["+*"]
 
 [tool.plone-code-analysis]
-paths = "docker-entrypoint.py src/setup.py src/plone_code_analysis tests/fixtures/packages/ok tests/package tests/conftest.py"
-paths_pyroma = "src/ tests/fixtures/packages/ok"
+paths= "bar setup.py"
