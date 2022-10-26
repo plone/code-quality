@@ -288,6 +288,7 @@ LOG_LEVEL=DEBUG make format
 Tests are implemented with `pytest` and can be run with:
 
 ```shell
+make build
 make test
 ```
 

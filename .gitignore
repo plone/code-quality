@@ -7,3 +7,6 @@ bin
 include
 lib
 lib64
+src/plone_code_analysis.egg-info
+src/build
+/pyvenv.cfg
