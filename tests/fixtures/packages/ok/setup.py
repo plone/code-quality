@@ -23,6 +23,7 @@ setup(
         "Framework :: Plone :: 5.2",
         "Framework :: Plone :: 6.0",
         "Framework :: Plone :: Addon",
+        "Framework :: Plone :: Distribution",
         "Framework :: Plone",
         "Framework :: Zope :: 5",
         "Framework :: Zope",
