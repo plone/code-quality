@@ -5,6 +5,7 @@ flake8-debugger==4.1.2
 flake8-print==5.0.0
 flakeheaven==3.1.0
 isort==5.10.1
-pyroma==4.1
+pyroma==4.2
 tomli==2.0.1
+trove-classifiers>=2023.5.2
 zpretty==2.4.1
