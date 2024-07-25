@@ -1,4 +1,5 @@
 """Installer for the foo package."""
+
 from pathlib import Path
 from setuptools import setup
 

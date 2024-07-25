@@ -1,4 +1,5 @@
 """Foo package"""
+
 import logging
 
 
