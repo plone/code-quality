@@ -1,10 +1,10 @@
 src/
-black==24.4.2
+black==25.1.0
 flake8-blind-except==0.2.1
 flake8-debugger==4.1.2
 flake8-print==5.0.0
-flakeheaven==3.1.0
-isort==5.10.1
-pyroma==4.1
-tomli==2.0.1
-zpretty==2.4.1
+flakeheaven==3.3.0
+isort==6.0.1
+pyroma==4.2
+tomli==2.2.1
+zpretty==3.1.0
