@@ -4,7 +4,6 @@ from plone_code_analysis.cmd import run_zpretty
 from plone_code_analysis.logger import logger
 from plone_code_analysis.settings import formatters_from_settings
 
-
 FORMATTERS = {
     "isort": [
         run_command,

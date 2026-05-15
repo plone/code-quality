@@ -2,7 +2,6 @@ import logging
 import os
 import re
 
-
 LOG_LEVEL = {
     "INFO": logging.INFO,
     "DEBUG": logging.DEBUG,

@@ -10,7 +10,6 @@ from plone_code_analysis.settings import read_settings_from_file
 import os
 import sys
 
-
 ACTIONS = {
     "check": run_checks,
     "format": run_formatters,

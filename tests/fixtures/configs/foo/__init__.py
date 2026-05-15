@@ -1,5 +1,5 @@
 """Foo package"""
-import logging
 
+import logging
 
 logger = logging.getLogger("logger")

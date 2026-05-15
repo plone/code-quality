@@ -1,9 +1,9 @@
 """Test plone_code_analysis.settings."""
+
 from pathlib import Path
 from plone_code_analysis import settings
 
 import pytest
-
 
 CONFIGS_PATH = Path("tests/fixtures/configs").resolve()
 
