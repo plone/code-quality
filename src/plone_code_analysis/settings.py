@@ -5,7 +5,6 @@ from typing import Any
 
 import tomli
 
-
 SECTION = "tool.plone-code-analysis"
 
 

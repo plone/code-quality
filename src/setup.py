@@ -1,7 +1,7 @@
 """Installer for the plone_code_analysis package."""
+
 from pathlib import Path
 from setuptools import setup
-
 
 long_description = Path("README.md").read_text()
 

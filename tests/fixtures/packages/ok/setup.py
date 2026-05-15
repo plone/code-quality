@@ -3,7 +3,6 @@
 from pathlib import Path
 from setuptools import setup
 
-
 long_description = f"""
 {Path("README.md").read_text()}\n
 """

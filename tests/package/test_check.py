@@ -1,11 +1,11 @@
 """Test plone_code_analysis.settings."""
+
 from pathlib import Path
 from plone_code_analysis import check
 from plone_code_analysis import settings
 
 import os
 import pytest
-
 
 PCK_OK = Path("tests/fixtures/packages/ok").resolve()
 PCK_NOK = Path("tests/fixtures/packages/not_ok").resolve()
